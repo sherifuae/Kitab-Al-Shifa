@@ -68,14 +68,14 @@ class DATABASE_CONFIG {
 		//'encoding' => 'utf8',
 	);
 
-	public $joomla = array(
+	public $drupal = array(
 			'datasource' => 'Database/Mysql',
 			'persistent' => false,
 			'host' => '127.0.0.1',
 			'login' => 'kitab',
 			'password' => 'kitab',
-			'database' => 'joomla',
-			'prefix' => 'jem5_',
+			'database' => 'drupal',
+			'prefix' => '',
 	//'encoding' => 'utf8',
 	);
 
