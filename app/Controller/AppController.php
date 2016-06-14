@@ -3,7 +3,9 @@ class AppController extends Controller {
 	public $uses = array('User', 'Usergroup', 'Group');
 
  	var $components = array('Session',
+ 		'Flash',
  		'Auth' => array(
+ 			'authenticate' => array('Drupal'),
 			'loginAction' => array(
 				'controller' => 'users',
 				'action' => 'login',
@@ -30,8 +32,8 @@ class AppController extends Controller {
 	);
 
 	function beforeFilter() {
-		$this->set('admin', $this->_isAdmin());
 		$this->set('logged_in', $this->_loggedIn());
+		$this->set('admin', $this->_isAdmin());
 		$this->set('users_username', $this->_usersUsername());
 		$this->set('users_id', $this->_usersId());
 		$this->_defaultPermissions();
@@ -104,9 +106,6 @@ class AppController extends Controller {
 
 		$rulesRaw = $this->User->find('all',
 		array(
-	  		'contain' => array(
-				'Usergroup' => array('Group.acl')
-				),
 			'conditions' => array(
 				'id' => $userId
 				),
@@ -138,7 +137,7 @@ class AppController extends Controller {
 	//
 	function _loggedIn() {
 		$logged_in = FALSE;
-		if ($this->Auth->user()) {
+		if ($this->Auth->login()) {
 			$logged_in = TRUE;
 		}
 		return $logged_in;

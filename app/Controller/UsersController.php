@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 	var $components = array('RequestHandler');
-
+	
 /**
  * index method
  *
@@ -180,15 +180,11 @@ class UsersController extends AppController {
 	}
 	
 	public function login() {
-		if ($this->Auth->login()) {
-			$this->redirect($this->Auth->redirect());
-		} else {
-			if ($this->request->isPost()) {
-				$this->Session->setFlash(__('Invalid username or password, try again'), 'alert');
+		if ($this->request->is('post')) {
+			if ($this->Auth->login()) {
+				return $this->redirect($this->Auth->redirectUrl());
 			}
-			else {
-			}
-			
+			$this->Flash->alert(__('Invalid username or password, try again'));
 		}
 	}
 	

@@ -107,3 +107,9 @@ Cache::config('default', array('engine' => 'File'));
   * as it compromises patient safety if in the public.
  */
  Configure::write('save_ohip', false);
+
+ /* Settings for REST login and logout
+  * 
+  */
+ Configure::write('rest_login', 'https://emlondon.ca/rest/user/login');
+ Configure::write('rest_logout', 'https://emlondon.ca/rest/user/logout');
